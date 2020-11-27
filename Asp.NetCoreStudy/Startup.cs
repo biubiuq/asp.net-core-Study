@@ -54,6 +54,32 @@ namespace Asp.NetCoreStudy
                     $"Hello 你好{CultureInfo.CurrentCulture.DisplayName}");
             });
             /*
+             * 什么情况我们需要中间件?
+             * 那么，何时使用中间件呢？我的理解是在我们的应用程序当中和业务关系不大的一些需要在管道中做的事情可以使用，比如身份验证，Session存储，日志记录等。其实我们的 asp.net core项目中本身已经包含了很多个中间件。
+             
+             */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            /*
+             * 
              * 1：异常/错误处理
 当应用在开发环境中运行时：
 开发人员异常页中间件 (UseDeveloperExceptionPage) 报告应用运行时错误。
