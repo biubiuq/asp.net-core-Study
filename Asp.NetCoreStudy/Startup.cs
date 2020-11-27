@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,14 +27,31 @@ namespace Asp.NetCoreStudy
         {
             app.Use(async (context, next) =>
             {
-                context.Response.WriteAsync("hi,ni hao hini ");
-                // Do work that doesn't write to the Response.
-                await next.Invoke();  //如果不调用这句话的话下面的请求就会短路
-                // Do logging or other work that doesn't write to the Response.
+                context.Response.ContentType = "text/plain;charset=utf-8";
+                await next.Invoke();
+
             });
-            app.Run(async context =>
+            ///通常，中间件封装在类中，并且通过扩展方法公开。 请考虑以下中间件，
+            ///该中间件通过查询字符串设置当前请求的区域性
+            app.Use(async (context, next) =>
             {
-                await context.Response.WriteAsync("Hello, World!");
+                var cultureQuery = context.Request.Query["culture"];
+                if (!string.IsNullOrWhiteSpace(cultureQuery))
+                {
+                    var culture = new CultureInfo(cultureQuery);
+
+                    CultureInfo.CurrentCulture = culture;
+                    CultureInfo.CurrentUICulture = culture;
+                }
+
+                // Call the next delegate/middleware in the pipeline
+                await next();
+            });
+
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync(
+                    $"Hello 你好{CultureInfo.CurrentCulture.DisplayName}");
             });
             /*
              * 1：异常/错误处理
