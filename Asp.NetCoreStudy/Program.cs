@@ -21,6 +21,7 @@ namespace Asp.NetCoreStudy
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+
                 });
     }
 }
