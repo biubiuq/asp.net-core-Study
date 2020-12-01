@@ -27,5 +27,14 @@ namespace Asp.NetCoreStudy
             string name = _redis.StringGet("Name");
             return name;
         }
+        [HttpGet("{values}")]
+        public string Get(string values)
+        {
+            // 往Redis里面存入数据
+            _redis.StringSet("Name", values);
+            // 从Redis里面取数据
+            string name = _redis.StringGet("Name");
+            return name;
+        }
     }
 }
