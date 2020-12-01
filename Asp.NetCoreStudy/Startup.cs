@@ -22,7 +22,9 @@ namespace Asp.NetCoreStudy
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRouting();
+            services.AddControllers();
+
+            //   services.AddControllers();
             //redis»º´æ
             var section = Configuration.GetSection("Redis:Default");
             //Á¬½Ó×Ö·û´®
@@ -46,7 +48,10 @@ namespace Asp.NetCoreStudy
             }
 
             app.UseRouting();
-
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
             //app.UseEndpoints(endpoints =>
             //{
             //    endpoints.MapGet("/", async context =>
