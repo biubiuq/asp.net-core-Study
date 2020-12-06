@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Asp.NetCoreStudy.db;
+using Asp.NetCoreStudy.jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -55,7 +56,7 @@ namespace Asp.NetCoreStudy
                 };
             });
             //将生成token的类注册为单例
-         //   services.AddSingleton<IJwtAuthenticationHandler>(new JwtAuthenticationHandler(tokenSecretKey));
+            services.AddSingleton<IJwtAuthenticationHandler>(new JwtAuthenticationHandler(""));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,8 +66,10 @@ namespace Asp.NetCoreStudy
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseAuthentication();//认证
+          
             app.UseRouting();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
