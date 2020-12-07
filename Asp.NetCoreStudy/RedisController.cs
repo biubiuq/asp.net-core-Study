@@ -19,13 +19,13 @@ namespace Asp.NetCoreStudy
         }
 
         [HttpGet]
-        public string Get()
+        public IActionResult Get()
         {
             // 往Redis里面存入数据
             _redis.StringSet("Name", "Tom");
             // 从Redis里面取数据
             string name = _redis.StringGet("Name");
-            return name;
+            return Ok(name);
         }
         [HttpGet("{values}")]
         public string Get(string values)
