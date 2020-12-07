@@ -15,11 +15,7 @@ namespace Asp.NetCoreStudy.jwt
     }
     public class JwtAuthenticationHandler : IJwtAuthenticationHandler
     {
-        private readonly IDictionary<string, string> users = new Dictionary<string, string>()
-        {
-            {"user1","password1"},
-            {"user2","password2"},
-        };
+    
 
         private readonly string _token;   //声明一个加密的密钥，由外部传入
 
@@ -31,10 +27,7 @@ namespace Asp.NetCoreStudy.jwt
         public string Authenticate(string username, string password)
         {
             //如果用户名密码错误则返回null
-            if (!users.Any(t => t.Key == username && t.Value == password))
-            {
-                return null;
-            }
+         
             var tokenKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_token));
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor()
