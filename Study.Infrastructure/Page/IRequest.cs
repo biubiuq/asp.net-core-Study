@@ -5,11 +5,10 @@ using System.Text;
 namespace Study.Infrastructure.Page
 {
     /// <summary>
-    /// 获取分页并排序请求
+    /// 返回时接口
     /// </summary>
-    public interface IPageAndSortRequest : IPageRequest, ISortRequest
+    /// <typeparam name="TResponse"></typeparam>
+    public interface IRequest<out TResponse> 
     {
-
     }
-   
 }

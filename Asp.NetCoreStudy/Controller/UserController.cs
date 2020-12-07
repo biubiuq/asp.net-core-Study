@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Asp.NetCoreStudy.db;
 using Microsoft.AspNetCore.Mvc;
+using Study.Infrastructure.Page;
 using Study.Model;
+using Study.Model.Dto;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -26,10 +28,10 @@ namespace Asp.NetCoreStudy.Controller
         {
             return _context.User.ToList();
         }
-        [HttpGet]
-        public User Get([FromBody] User user)
+        [HttpGet("user")]
+        public Task<PageResultDto<User>> Get([FromQuery] UserDto user)
         {
-          return  _context.User.Where(a =>  a.userName == user.userName && a.passWord == user.passWord ).SingleOrDefault() ;
+          return  _context.User.Where(a =>  a.userName == user.Lis && a.passWord == user.passWord ) ;
         }
         // GET api/<UserController>/5
      
