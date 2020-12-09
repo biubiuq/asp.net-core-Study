@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Asp.NetCoreStudy.db;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Study.Infrastructure.Page;
 using Study.Model;
@@ -13,6 +14,7 @@ using Study.Model.Dto;
 
 namespace Asp.NetCoreStudy.Controller
 {
+    [Authorize]   //表示需要认证授权访问
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -28,16 +30,17 @@ namespace Asp.NetCoreStudy.Controller
         {
             return _context.User.ToList();
         }
-        [HttpGet("user")]
-        public Task<PageResultDto<User>> Get([FromQuery] UserDto user)
+        [HttpGet("Page")]
+        public PageResultDto<User> Get([FromQuery] UserDto user)
         {
-            // return  _context.User.Where(a =>  a.userName == user.Lis && a.passWord == user.passWord ) ;
-            return null;
+            var result = new PageResultDto<User>();
+            result.List=  _context.User.Where(a => a.userName == user.userName && a.passWord == user.passWord).Skip(user.PageSize* (user.PageIndex - 1)).Take(user.PageSize).ToList();
+            result.PageIndex = user.PageIndex;
+            result.PageSize = user.PageSize;
+            result.TotalPages = _context.User.Where(a => a.userName == user.userName && a.passWord == user.passWord).Count();
+            return result;
         }
-        public User GetSingerAsync(Func<User, bool> predicate)
-        {
-            return  _context.User.Where(predicate).SingleOrDefault();
-        }
+    
         
         // POST api/<UserController>
         [HttpPost]

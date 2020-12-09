@@ -6,6 +6,7 @@ using Asp.NetCoreStudy.db;
 using Asp.NetCoreStudy.jwt;
 using Microsoft.AspNetCore.Mvc;
 using Study.Model;
+using Study.Model.Dto;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,12 +28,15 @@ namespace Asp.NetCoreStudy.Controller
         [HttpPost]
         public dynamic Post( User user)
         {
-            User user1 = _user.GetSingerAsync(a => a.userName == user.userName && a.passWord == user.passWord);
-            if (user1 == null)
+            var user1 = _user.Get(new UserDto() { 
+                 userName=user.userName,
+                  passWord=user.passWord
+            });
+            if (user1.List == null)
             {
                 return NotFound();
             }
-           return _jwt.Authenticate(user1.userName, user1.passWord);
+           return _jwt.Authenticate(user.userName, user.passWord);
         }
 
        
