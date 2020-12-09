@@ -27,7 +27,7 @@ namespace Asp.NetCoreStudy.Controller
         [HttpPost]
         public dynamic Post( User user)
         {
-            User user1= _user.Get(user);
+            User user1 = _user.GetSingerAsync(a => a.userName == user.userName && a.passWord == user.passWord);
             if (user1 == null)
             {
                 return NotFound();

@@ -31,11 +31,14 @@ namespace Asp.NetCoreStudy.Controller
         [HttpGet("user")]
         public Task<PageResultDto<User>> Get([FromQuery] UserDto user)
         {
-          return  _context.User.Where(a =>  a.userName == user.Lis && a.passWord == user.passWord ) ;
+            // return  _context.User.Where(a =>  a.userName == user.Lis && a.passWord == user.passWord ) ;
+            return null;
         }
-        // GET api/<UserController>/5
-     
-
+        public User GetSingerAsync(Func<User, bool> predicate)
+        {
+            return  _context.User.Where(predicate).SingleOrDefault();
+        }
+        
         // POST api/<UserController>
         [HttpPost]
         public void Post([FromBody] string value)
