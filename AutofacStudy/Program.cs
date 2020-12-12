@@ -9,21 +9,32 @@ namespace AutofacStudy
 {
     class Program
     {
+        
         private static IContainer Container { get; set; }
 
         static void Main(string[] args)
         {
+           
             var builder = new ContainerBuilder();
             builder.RegisterType<ConsoleOutput>().As<IOutput>();
             builder.RegisterType<TodayWriter>().As<IDateWriter>();
             Container = builder.Build();
-
+        
+            //
             // The WriteDate method is where we'll make use
             // of our dependency injection. We'll define that
             // in a bit.
             WriteDate();
             Console.WriteLine("");
             Console.ReadLine();
+            //Autofac 自动为你的类从容器中寻找匹配拥有最多参数的构造方法.
+            //手动指定一个构造函数 , 通过这种方式使用和覆盖注册组件自动选择的构造函数:
+            //builder.RegisterType<MyComponent>()
+            //.UsingConstructor(typeof(ILogger), typeof(IConfigReader));
+            //实例组件
+            //如果你希望提前生成一个组件注册到aotufac之中
+          //   var output = new StringWriter();
+            // builder.RegisterInstance(output).As<TextWriter>();
         }
         public static void WriteDate()
         {

@@ -61,8 +61,9 @@ namespace Asp.NetCoreStudy
 
             #region 在控制器中使用属性依赖注入，其中注入属性必须标注为public
             //在控制器中使用属性依赖注入，其中注入属性必须标注为public
+            ///GetExportedTypes 显示在程序集外可见的类,反射时候会用到。构建程序集里public的类的实例时候，可以用这个函数得到这些类。
             var controllersTypesInAssembly = typeof(Startup).Assembly.GetExportedTypes()
-.Where(type => typeof(Microsoft.AspNetCore.Mvc.ControllerBase).IsAssignableFrom(type)).ToArray();
+                .Where(type => typeof(Microsoft.AspNetCore.Mvc.ControllerBase).IsAssignableFrom(type)).ToArray();
             containerBuilder.RegisterTypes(controllersTypesInAssembly).PropertiesAutowired();
             #endregion
         }
