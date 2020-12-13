@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp.NetCoreStudy", "Asp.NetCoreStudy\Asp.NetCoreStudy.csproj", "{0EA673C8-083E-4C19-BCE4-1343759794AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asp.NetCoreStudy", "Asp.NetCoreStudy\Asp.NetCoreStudy.csproj", "{0EA673C8-083E-4C19-BCE4-1343759794AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaRStudy", "MediaRStudy\MediaRStudy.csproj", "{EE2DC85A-0586-499C-A691-19757B7ACCAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{0EA673C8-083E-4C19-BCE4-1343759794AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EA673C8-083E-4C19-BCE4-1343759794AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EA673C8-083E-4C19-BCE4-1343759794AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE2DC85A-0586-499C-A691-19757B7ACCAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE2DC85A-0586-499C-A691-19757B7ACCAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE2DC85A-0586-499C-A691-19757B7ACCAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE2DC85A-0586-499C-A691-19757B7ACCAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

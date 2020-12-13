@@ -21,20 +21,10 @@ namespace Asp.NetCoreStudy
             return Task.FromResult("ok");
         }
     }
- 
 
-    /// <summary>
-    /// 如果Handler是完全同步的，可以继承RequestHandler类
-    /// </summary>
-    public class SyncHandler : RequestHandler<Ping>
-    {
-        protected override void Handle(Ping request)
-        {
-            return $"SyncHandler Pong";
-        }
 
-      
-    }
+
+
     #region 多播发送接口
     //Publish 方法的默认实现：同步循环每个处理程序，一个失败不影响后边的处理程序，这样可以确保每个处理程序都依次运行，而且按照顺序运行。
     // 根据发布通知的不同需求，您可能需要不同的策略来处理通知，也许您想并行发布所有通知，或者使用您自己的异常处理逻辑包装每个通知处理程序。
