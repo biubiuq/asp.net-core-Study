@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <StartupObject>Asp.NetCoreStudy.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,7 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Study.Application\Study.Application.csproj" />
+    <ProjectReference Include="..\Study.Extend\Study.Extend.csproj" />
     <ProjectReference Include="..\Study.Model\Study.Model.csproj" />
+    <ProjectReference Include="..\Study.Repository.EFRepository\Study.Repository.EFRepository.csproj" />
   </ItemGroup>
 
 </Project>

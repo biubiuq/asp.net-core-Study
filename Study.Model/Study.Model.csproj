@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Study.Infrastructure\Study.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dto\" />
+  </ItemGroup>
+
 </Project>

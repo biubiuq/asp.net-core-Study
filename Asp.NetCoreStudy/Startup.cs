@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Asp.NetCoreStudy.db;
 using Asp.NetCoreStudy.jwt;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,7 +15,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-
+using Study.Application;
+using Study.Repository.EFRepository;
 namespace Asp.NetCoreStudy
 {
     public class Startup
@@ -41,8 +43,6 @@ namespace Asp.NetCoreStudy
                       options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";//设置时间格式
                   });
             #region 添加跨域
-
-            #endregion
             services.AddCors(c =>
             {
                 c.AddPolicy("Free", policy =>
@@ -59,10 +59,9 @@ namespace Asp.NetCoreStudy
                     .WithMethods("get", "post", "put", "delete")
                     //.WithHeaders("Authorization");
                     .AllowAnyHeader();
-                }); 
+                });
             });
-            var connection = Configuration.GetSection("MysqlConnection").Value;
-            services.AddDbContext<mysqlContext>(options => options.UseMySql(connection));
+            #endregion
             #region JWT
             string _token = "123456789123456789";
             services.AddAuthentication(config =>
@@ -85,6 +84,8 @@ namespace Asp.NetCoreStudy
             //将生成token的类注册为单例
             services.AddSingleton<IJwtAuthenticationHandler>(new JwtAuthenticationHandler(_token));
             #endregion
+            services.AddMyRepository(Configuration);
+            services.AddMyAppServices(Configuration);
 
         }
 

@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Asp.NetCoreStudy.db;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Study.Application.Dto;
+using Study.Extend.Query;
 using Study.Infrastructure.Page;
 using Study.Model;
-using Study.Model.Dto;
+using Study.Repository.EFRepository;
+
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,33 +22,29 @@ namespace Asp.NetCoreStudy.Controller
     [ApiController]
     public class UserController : ControllerBase
     {
-        public mysqlContext _context;
-        public UserController(mysqlContext dbContext)
+        public dbContext _context;
+        public UserController(dbContext dbContext)
         {
             _context = dbContext;
         }
         // GET: api/<UserController>
-        [HttpGet]
-        public IEnumerable<User> Get()
-        {
-            return _context.User.ToList();
-        }
-        [HttpGet("Page")]
+     
+        [HttpGet()]
         public PageResultDto<User> Get([FromQuery] UserDto user)
         {
-            var result = new PageResultDto<User>();
-            result.List=  _context.User.Where(a => a.userName == user.userName && a.passWord == user.passWord).Skip(user.PageSize* (user.PageIndex - 1)).Take(user.PageSize).ToList();
-            result.PageIndex = user.PageIndex;
-            result.PageSize = user.PageSize;
-            result.TotalPages = _context.User.Where(a => a.userName == user.userName && a.passWord == user.passWord).Count();
-            return result;
+         
+            return _context.User.SourcePage(user);
         }
     
         
         // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] User value)
         {
+            value.createDate = DateTime.Now;
+            value.Id = Guid.NewGuid().ToString();
+            _context.User.Add(value);
+            _context.SaveChanges();
         }
 
         // PUT api/<UserController>/5
