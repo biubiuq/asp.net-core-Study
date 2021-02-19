@@ -22,21 +22,14 @@ namespace Asp.NetCoreStudy.Controller
             _context = dbContext;
         }
         // GET: api/<RoleUserController>
-        [HttpGet("id")]
-        public IEnumerable<string> Get()
-        {
-            if (true)
-            {
-                
-            }
-            return new string[] { "value1", "value2" };
-        }
+       
+     
 
         // GET api/<RoleUserController>/5
-        [HttpGet("{id}")]
-        public IEnumerable<role_user> Get(string id)
+        [HttpGet]
+        public Role_user Get([FromQuery]string id)
         {
-            return _context.role_user.Where(a => a.UserId == id).ToList();
+            return _context.Role_user.Where(a => a.UserId == id).SingleOrDefault();
         }
 
         // POST api/<RoleUserController>

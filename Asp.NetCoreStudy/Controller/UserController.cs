@@ -29,7 +29,7 @@ namespace Asp.NetCoreStudy.Controller
         }
         // GET: api/<UserController>
      
-        [HttpGet()]
+        [HttpGet]
         public PageResultDto<User> Get([FromQuery] UserDto user)
         {
 

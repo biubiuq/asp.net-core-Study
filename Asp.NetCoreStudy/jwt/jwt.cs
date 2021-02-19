@@ -33,7 +33,7 @@ namespace Asp.NetCoreStudy.jwt
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
                 SigningCredentials = new SigningCredentials(tokenKey, SecurityAlgorithms.HmacSha256),
-                Expires = DateTime.Now.AddMinutes(10),
+                Expires = DateTime.Now.AddHours(10),
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name,username),

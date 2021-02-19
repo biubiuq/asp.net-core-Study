@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Study.Model
 {
-   public class role_user
+   public class Role_user
     {
       
         public string Id { get; set; }
