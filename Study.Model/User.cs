@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Study.Model
 {
-    [Table("user")]
+ 
     public class User
     {
         public string Id { get; set; }

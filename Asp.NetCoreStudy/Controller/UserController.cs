@@ -32,7 +32,8 @@ namespace Asp.NetCoreStudy.Controller
         [HttpGet()]
         public PageResultDto<User> Get([FromQuery] UserDto user)
         {
-         
+
+       
             return _context.User.SourcePage(user);
         }
     
@@ -47,16 +48,28 @@ namespace Asp.NetCoreStudy.Controller
             _context.SaveChanges();
         }
 
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        /// <summary>
+        /// 编辑用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="value"></param>
+        [HttpPut()]
+        public void Put( [FromBody] User value)
         {
+            _context.User.Update(value);
+            _context.SaveChanges();
         }
 
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
+           User user=  _context.User.Find(id);
+            if (user != null)
+            {
+                _context.User.Remove(user);
+                _context.SaveChanges();
+            }
         }
     }
 }
