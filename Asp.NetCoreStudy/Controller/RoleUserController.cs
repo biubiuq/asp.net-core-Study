@@ -29,14 +29,30 @@ namespace Asp.NetCoreStudy.Controller
         [HttpGet]
         public Role_user Get([FromQuery]string id)
         {
-            return _context.Role_user.Where(a => a.UserId == id).SingleOrDefault();
+           var data=  _context.Role_user.Where(a => a.UserId == id).SingleOrDefault();
+            return data;
         }
 
         // POST api/<RoleUserController>
         [HttpPost]
-        public void Post(string User_Id,string [] role_Id)
+        public void Post(Role_user role_)
         {
+            ///说明存在数据
+            if (_context.Role_user.Where(a => a.UserId == role_.UserId).Count() > 0)
+            {
+                var data = _context.Role_user.Where(a => a.UserId == role_.UserId).SingleOrDefault();
+                data.RoleId = role_.RoleId;
+                _context.Role_user.Update(data);
+            }
+            else
+            {
+                role_.Id = Guid.NewGuid().ToString();
 
+                role_.Status = "1";
+                _context.Role_user.Add(role_);
+            }
+           
+            _context.SaveChanges();
         }
 
         // PUT api/<RoleUserController>/5

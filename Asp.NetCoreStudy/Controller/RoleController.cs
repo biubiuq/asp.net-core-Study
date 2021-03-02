@@ -4,6 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Study.Application.Dto;
+using Study.Extend.Query;
+using Study.Infrastructure.Page;
+using Study.Model;
 using Study.Repository.EFRepository;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,9 +26,9 @@ namespace Asp.NetCoreStudy.Controller
         }
         // GET: api/<RoleController>
         [HttpGet("Id")]
-        public IEnumerable<string> Get(string Id)
+        public PageResultDto<role> Get(RoleDto role)
         {
-            return new string[] { "value1", "value2" };
+            return _context.Role.SourcePage(role);
         }
 
         // GET api/<RoleController>/5
