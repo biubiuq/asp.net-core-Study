@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <StartupObject>Asp.NetCoreStudy.Program</StartupObject>
+    <UserSecretsId>34574dd7-7872-4923-a146-164deeaafc40</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

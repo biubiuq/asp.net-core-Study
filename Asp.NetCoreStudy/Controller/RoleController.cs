@@ -25,35 +25,46 @@ namespace Asp.NetCoreStudy.Controller
             _context = dbContext;
         }
         // GET: api/<RoleController>
-        [HttpGet("Id")]
-        public PageResultDto<role> Get(RoleDto role)
+        [HttpGet]
+        public PageResultDto<role> Get([FromQuery] RoleDto role)
         {
             return _context.Role.SourcePage(role);
         }
 
-        // GET api/<RoleController>/5
-        [HttpGet()]
-        public IEnumerable<dynamic> Get()
-        {
-          return  _context.Role.ToList();
-        }
+        //// GET api/<RoleController>/5
+        //[HttpGet()]
+        //public IEnumerable<dynamic> Get()
+        //{
+        //  return  _context.Role.ToList();
+        //}
 
         // POST api/<RoleController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] role value)
         {
+        
+            value.Id = Guid.NewGuid().ToString();
+            _context.Role.Add(value);
+            _context.SaveChanges();
         }
 
         // PUT api/<RoleController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+
         }
 
         // DELETE api/<RoleController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
+           role ro = _context.Role.Find(id);
+            if (ro != null)
+            {
+                _context.Role.Remove(ro);
+                _context.SaveChanges();
+            }
         }
     }
 }
