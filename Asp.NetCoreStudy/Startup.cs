@@ -86,6 +86,7 @@ namespace Asp.NetCoreStudy
             #endregion
             services.AddMyRepository(Configuration);
             services.AddMyAppServices(Configuration);
+         
 
         }
 
