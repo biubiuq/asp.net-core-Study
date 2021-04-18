@@ -11,9 +11,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Study.Application;
 using Study.Repository.EFRepository;
@@ -83,6 +85,7 @@ namespace Asp.NetCoreStudy
             });
             //将生成token的类注册为单例
             services.AddSingleton<IJwtAuthenticationHandler>(new JwtAuthenticationHandler(_token));
+            services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
             #endregion
             services.AddMyRepository(Configuration);
             services.AddMyAppServices(Configuration);
@@ -98,10 +101,12 @@ namespace Asp.NetCoreStudy
                 app.UseDeveloperExceptionPage();
             }
             app.UseCors("Free");
+          
             app.UseAuthentication();//认证
           
             app.UseRouting();
             app.UseAuthorization();
+            app.UseStaticFiles();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

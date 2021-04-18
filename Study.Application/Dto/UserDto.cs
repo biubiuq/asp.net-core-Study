@@ -17,5 +17,8 @@ namespace Study.Application.Dto
 
         [Range(1, int.MaxValue)]
         public virtual int PageIndex { get; set; } = 1;
+
+        public virtual string captcha { get; set; } = "";
+        public virtual string captchaId { get; set; }
     }
 }
