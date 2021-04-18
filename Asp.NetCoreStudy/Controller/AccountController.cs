@@ -34,6 +34,18 @@ namespace Asp.NetCoreStudy.Controller
         }
         // GET api/<AccountController>/5
         [HttpPost]
+        public dynamic Post(User user)
+        {
+            var user1 = _context.User.Where(a => a.userName == user.userName && a.passWord == user.passWord).SingleOrDefault();
+            if (user1 == null)
+            {
+                return NotFound();
+            }
+            return _jwt.Authenticate(user.userName, user.passWord);
+        }
+
+        // GET api/<AccountController>/5
+        [HttpPost]
         public dynamic Login(UserDto user)
         {
 
