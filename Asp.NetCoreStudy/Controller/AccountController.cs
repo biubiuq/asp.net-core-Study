@@ -55,11 +55,11 @@ namespace Asp.NetCoreStudy.Controller
             {
                 return "验证码错误";
             }
-            var user1 = _context.User.Where(a => a.userName == user.userName && a.passWord == user.passWord).SingleOrDefault();
-            if (user1 == null)
-            {
-                return NotFound();
-            }
+        //    var user1 = _context.User.Where(a => a.userName == user.userName && a.passWord == user.passWord).SingleOrDefault();
+            //if (user1 == null)
+            //{
+            //    return NotFound();
+            //}
             return new UserResponse<Object>() { 
                 code=0,
                 data=new {
